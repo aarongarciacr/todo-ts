@@ -1,4 +1,4 @@
-import { type TodoId, type Todo as TodoType } from "../types";
+import { type TodoId, type Todo as TodoType } from "../types/types";
 
 interface Props extends TodoType {
   deleteTodo: (id: TodoId) => void;
@@ -21,8 +21,8 @@ export const Todo: React.FC<Props> = ({
         className="toggle"
         checked={completed}
         type="checkbox"
-        onChange={() => {
-          onToggleCompleteTodo({ id, completed });
+        onChange={(e) => {
+          onToggleCompleteTodo({ id, completed: e.target.checked });
         }}
       ></input>
       <label>{title}</label>

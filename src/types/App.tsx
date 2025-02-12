@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { Todos } from "./components/Todos";
-import { type TodoId, Todo as TodoType } from "./types";
+import { Todos } from "../components/Todos";
+import { type FilterValue, type TodoId, Todo as TodoType } from "./types";
+import { TODO_FILTERS } from "./consts";
+import { Footer } from "../components/Footer";
 
 const mockTodos = [
   {
@@ -22,6 +24,9 @@ const mockTodos = [
 
 const App = () => {
   const [todos, setTodos] = useState(mockTodos);
+  const [filterSelected, setFilterSelected] = useState<FilterValue>(
+    TODO_FILTERS.ALL
+  );
 
   const handleRemove = (id: TodoId): void => {
     const newTodos = todos.filter((todo) => todo.id !== id);
@@ -44,12 +49,26 @@ const App = () => {
     setTodos(newTodos);
   };
 
+  const handleFilterChange = (filter: FilterValue): void => {
+    setFilterSelected(filter);
+  };
+
+  const activeCount = todos.filter((todo) => !todo.completed).length;
+  const completedCount = todos.length - activeCount;
+
   return (
     <div className="todoapp">
       <Todos
         todos={todos}
         deleteTodo={handleRemove}
         onToggleCompleteTodo={handleCompleted}
+      />
+      <Footer
+        activeCount={activeCount}
+        completedCount={completedCount}
+        filterSelected={filterSelected}
+        handleFilterChange={handleFilterChange}
+        onClearCompleted={() => {}}
       />
     </div>
   );
