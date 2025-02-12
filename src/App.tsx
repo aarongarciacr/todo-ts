@@ -1,26 +1,31 @@
 import { useState } from "react";
+import { Todos } from "./components/Todos";
 
 const mockTodos = [
   {
     id: "1",
-    title: "todo 1",
-    completed: false,
+    title: "Create Todo project with Typescript",
+    completed: true,
   },
   {
     id: "2",
-    title: "todo 2",
+    title: "Learn Next.js",
     completed: false,
   },
   {
     id: "3",
-    title: "todo 3",
+    title: "Practice DSN&A",
     completed: false,
   },
 ];
 
 const App = () => {
   const [todos, setTodos] = useState(mockTodos);
-  return <Todos todos={todos} />;
+  return (
+    <div className="todoapp">
+      <Todos todos={todos} />;
+    </div>
+  );
 };
 
 export default App;
