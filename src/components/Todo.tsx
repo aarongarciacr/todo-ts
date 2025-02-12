@@ -1,8 +1,10 @@
 import { type Todo as TodoType } from "../types";
 
-type Props = TodoType;
+interface Props extends TodoType {
+  deleteTodo: (id: string) => void;
+}
 
-export const Todo: React.FC<Props> = ({ title, completed }) => {
+export const Todo: React.FC<Props> = ({ id, title, completed, deleteTodo }) => {
   return (
     <div className="view">
       <input
@@ -12,7 +14,7 @@ export const Todo: React.FC<Props> = ({ title, completed }) => {
         onChange={() => {}}
       ></input>
       <label>{title}</label>
-      <button className="destroy" onClick={() => {}}></button>
+      <button className="destroy" onClick={() => deleteTodo(id)}></button>
     </div>
   );
 };

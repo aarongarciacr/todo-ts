@@ -3,9 +3,10 @@ import { Todo } from "./Todo";
 
 interface Props {
   todos: ListOfTodos;
+  deleteTodo: (id: string) => void;
 }
 
-export const Todos: React.FC<Props> = ({ todos }) => {
+export const Todos: React.FC<Props> = ({ todos, deleteTodo }) => {
   return (
     <ul className="todo-list">
       {todos.map((todo) => (
@@ -15,6 +16,7 @@ export const Todos: React.FC<Props> = ({ todos }) => {
             id={todo.id}
             title={todo.title}
             completed={todo.completed}
+            deleteTodo={deleteTodo}
           />
         </li>
       ))}
